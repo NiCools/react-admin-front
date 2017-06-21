@@ -1,5 +1,5 @@
-import {applyMiddleware, createStore, compose, combineReducers} from 'redux';
-import createLogger from 'redux-logger';
+import { applyMiddleware, createStore, compose, combineReducers } from 'redux';
+import { createLogger } from 'redux-logger';
 import globalConfig from 'config.js';
 import Sidebar from './Sidebar.js';
 import Login from './Login.js';
@@ -18,8 +18,8 @@ if (globalConfig.debug) {
 // 设置redux dev tools
 const composeEnhancers =
   process.env.NODE_ENV !== 'production' &&
-  typeof window === 'object' &&
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    typeof window === 'object' &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
       // Specify here name, actionsBlacklist, actionsCreators and other options
     }) : compose;
