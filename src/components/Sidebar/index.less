@@ -7,20 +7,25 @@
 .ant-layout-sidebar-trigger {
   position: fixed;
   text-align: center;
-  width: inherit;
-  bottom: 0;
+  width: 30px;
+  top: 8px;
+  left: 16px;
+  font-size: 16px;
   cursor: pointer;
-  height: 42px;
-  line-height: 48px;
-  background: rgba(0, 0, 0, 0.65);
+  height: 30px;
+  line-height: 30px;
+  background:#333;
   color: #fff;
   & when not (@sidebarCollapsible = true) {
     display: none;
   }
 }
-
+.ant-layout-logo-collapse {
+    margin: 8px 15px;
+    height: 30px;
+}
 .ant-layout-sidebar-base {
-  background: #404040;
+  background: #364150;
   position: absolute;
   overflow: auto;
   padding-bottom: 24px;
@@ -29,7 +34,7 @@
   // less的if语句: http://stackoverflow.com/questions/14910667/how-to-use-if-statements-in-less
   // 但是没有else语句...
   & when (@sidebarCollapsible = true) {
-    height: calc(~"100% - 42px"); // 这是个很神奇的写法, 要减去下方按钮的高度
+    height: calc(~"100%"); // 这是个很神奇的写法, 要减去下方按钮的高度
   }
   & when not (@sidebarCollapsible = true) {
     height: 100%;
@@ -92,4 +97,10 @@
   display: inline-block;
 }
 
+.ant-menu-dark, .ant-menu-dark .ant-menu-sub{
+  background: #364150;
+}
+.ant-menu-dark .ant-menu-inline.ant-menu-sub {
+   background: #364150;
+}
 /* 定义侧边栏折叠时的样式 - end */
