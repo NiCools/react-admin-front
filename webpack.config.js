@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const globalConfig = require('./src/config.js');
+const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -37,7 +38,7 @@ module.exports = {
     extensions: ['', '.js', '.jsx'],  // require的时候可以直接使用require('file')，不用require('file.js')
     alias: {
       antdcss: 'antd/dist/antd.min.css',  // import时的别名
-      'react/lib/ReactMount': 'react-dom/lib/ReactMount',
+      'react/lib/ReactMount': 'react-dom/lib/ReactMount'
     },
   },
 

@@ -197,7 +197,7 @@ class Sidebar extends React.PureComponent {
     return (
       <aside className={this.props.collapse ? "ant-layout-sidebar-collapse" : "ant-layout-sidebar"}>
         <Logo collapse={this.props.collapse} />
-         <div className="ant-layout-sidebar-trigger" onClick={this.props.handleClickCollapse}>
+        <div className="ant-layout-sidebar-trigger" onClick={this.props.handleClickCollapse}>
           <Icon type={this.props.collapse ? "right" : "left"} />
         </div>
         <Menu theme="dark" mode="inline"

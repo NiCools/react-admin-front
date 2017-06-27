@@ -8,12 +8,17 @@ class Welcome extends React.PureComponent {
 
   render() {
     return (
-      <div>
-        <h1 className="welcome-text">
-          Welcome, 这里是欢迎界面, 欢迎访问我的<a target="_blank" href="http://jxy.me">blog</a>.
-          <br />
-          项目地址: <a target="_blank" href="https://github.com/jiangxy/react-antd-admin">https://github.com/jiangxy/react-antd-admin</a>
-        </h1>
+      <div id="welcome_container">
+        <p>
+          Welcome, 这里是欢迎界面, 欢迎访问我的<a target="_blank" href="http://rulifun.com">个人网站</a>
+        </p>
+        <p>
+          项目地址: <a target="_blank" href="https://github.com/weihomechen/react-admin-front">https://github.com/weihomechen/react-admin-front</a>
+        </p>
+        <div className="welcome-img-container">
+          <img className="welcome-img" src="http://os4z3wv5q.bkt.clouddn.com/welcome.gif" />
+        </div>
+
       </div>
     );
   }

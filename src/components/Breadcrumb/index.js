@@ -1,6 +1,6 @@
 import React from 'react';
-import {Breadcrumb, Icon} from 'antd';
-import sidebarMenu, {headerMenu} from 'menu.js';  // 注意这种引用方式
+import { Breadcrumb, Icon } from 'antd';
+import sidebarMenu, { headerMenu } from 'menu.js';  // 注意这种引用方式
 import Logger from '../../utils/Logger';
 import './index.less';
 
@@ -51,9 +51,9 @@ class Bread extends React.PureComponent {
     const itemArray = [];
 
     // 面包屑导航的最开始都是一个home图标, 并且这个图标是可以点击的
-    itemArray.push(<Item key="systemHome" href="#"><Icon type="home"/> 首页</Item>);
+    itemArray.push(<Item key="systemHome" href="#"><Icon type="home" /> 首页</Item>);
 
-    // this.props.routes是react-router传进来的
+    // this.props.routes是 react-router传进来的
     for (const route of this.props.routes) {
       logger.debug('path=%s, route=%o', route.path, route);
       const name = this.nameMap.get(route.path);
@@ -61,9 +61,9 @@ class Bread extends React.PureComponent {
       if (name) {
         const icon = this.iconMap.get(route.path);
         if (icon) {
-          itemArray.push(<Item key={name}><Icon type={icon}/> {name}</Item>);  // 有图标的话带上图标
+          itemArray.push(<Item key={name}><Icon type={icon} /> {name}</Item>);  // 有图标的话带上图标
         } else {
-          // 这个key属性不是antd需要的, 只是react要求同一个array中各个元素要是不同的, 否则有warning
+          // 这个key 属性不是antd需要的, 只是 react要求同一个 array中各个元素要是不同的, 否则有warning
           itemArray.push(<Item key={name}>{name}</Item>);
         }
       }

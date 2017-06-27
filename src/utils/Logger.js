@@ -151,7 +151,7 @@ class Logger {
       args.unshift(`%c${this.name}: ${pattern}`);
     else
       args.unshift(`%c${pattern}`);
-    console.error.apply(console, args);
+    // console.error.apply(console, args);
   }
 
   /**

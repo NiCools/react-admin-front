@@ -1,8 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux'
-import {Link} from 'react-router';
-import {bindActionCreators} from 'redux'
-import {Spin, message, Tabs, Icon} from 'antd';
+import { connect } from 'react-redux'
+import { Link } from 'react-router';
+import { bindActionCreators } from 'redux'
+import { Spin, message, Tabs, Icon } from 'antd';
 import Header from '../Header';
 import Footer from '../Footer';
 import Sidebar from '../Sidebar';
@@ -13,8 +13,8 @@ import './index.less';
 import globalConfig from 'config.js';
 import ajax from '../../utils/ajax';
 import Logger from '../../utils/Logger';
-import sidebarMenu, {headerMenu} from '../../menu.js';
-import {loginSuccessCreator} from '../../redux/Login.js';
+import sidebarMenu, { headerMenu } from '../../menu.js';
+import { loginSuccessCreator } from '../../redux/Login.js';
 
 const TabPane = Tabs.TabPane;
 const logger = Logger.getLogger('App');
@@ -48,13 +48,12 @@ class App extends React.Component {
     if (globalConfig.tabMode.enable !== true) {
       return;
     }
-
     this.tabTitleMap = this.parseTabTitle();
     this.updateTab(this.props);
   }
 
   /**
-   * 每次在react-router中切换时也要判断是否更新tab
+   * 每次在react-router中切换时也要判断是否更新 tab
    */
   componentWillReceiveProps(nextProps) {
     // 如果不是tab模式直接返回
@@ -64,7 +63,7 @@ class App extends React.Component {
 
     // FIXME: hack, 在react-router中切换时会触发这个方法两次, 据说是和hashHistory有关, 需要手动处理下
     const action = this.props.location.action;
-    if (action === 'PUSH') {  // action有PUSH、POP、REPLACE等几种, 不太清楚分别是做什么用的
+    if (action === 'PUSH') {  // action有 PUSH、POP、REPLACE等几种, 不太清楚分别是做什么用的
       return;
     }
 
@@ -88,10 +87,10 @@ class App extends React.Component {
 
         // 注意这里, debug模式下每次刷新都必须重新登录
         if (res.success && !globalConfig.debug) {
-          // 这里不需要setState了, 因为setState的目的是为了re-render, 而下一句会触发redux的状态变化, 也会re-render
+          // 这里不需要setState了, 因为setState 的目的是为了re-render, 而下一句会触发redux的状态变化, 也会re-render
           // 所以直接修改状态, 就是感觉这么做有点奇怪...
           this.state.tryingLogin = false;
-          // App组件也可能触发loginSuccess action
+          // App组件也可能触发 loginSuccess action
           this.props.handleLoginSuccess(res.data);
         } else {
           this.handleLoginError('获取用户信息失败, 请重新登录');
@@ -115,13 +114,11 @@ class App extends React.Component {
     } else {
       message.error(errorMsg);
       logger.debug('not login, redirect to Login component');
-      this.setState({tryingLogin: false});
+      this.setState({ tryingLogin: false });
     }
   }
 
-
   // 下面开始是tab相关逻辑
-
 
   /**
    * 解析menu.js中的配置, 找到所有叶子节点对应的key和名称
@@ -136,7 +133,7 @@ class App extends React.Component {
         return;
       }
       if (item.icon) {
-        tabTitleMap.set(item.key, <span className="ant-layout-tab-text"><Icon type={item.icon}/>{item.name}</span>);
+        tabTitleMap.set(item.key, <span className="ant-layout-tab-text"><Icon type={item.icon} />{item.name}</span>);
       } else {
         tabTitleMap.set(item.key, <span className="ant-layout-tab-text">{item.name}</span>);
       }
@@ -154,12 +151,12 @@ class App extends React.Component {
     headerMenu.forEach(browseMenu);
 
     // 最后要手动增加一个key, 对应于404页面
-    tabTitleMap.set('*', <span className="ant-layout-tab-text"><Icon type="frown-o"/>Error</span>);
+    tabTitleMap.set('*', <span className="ant-layout-tab-text"><Icon type="frown-o" />Error</span>);
     return tabTitleMap;
   }
 
   /**
-   * 根据传入的props决定是否要新增一个tab
+   * 根据传入的props 决定是否要新增一个tab
    *
    * @param props
    */
@@ -188,7 +185,7 @@ class App extends React.Component {
     // 更新当前选中的tab
     this.state.currentTabKey = key;
 
-    // 当前key对应的tab是否已经在显示了?
+    // 当前key对应的 tab是否已经在显示了?
     let exist = false;
     for (const pane of this.state.tabPanes) {
       if (pane.key === key) {
@@ -197,12 +194,12 @@ class App extends React.Component {
       }
     }
 
-    // 如果key不存在就要新增一个tabPane
+    // 如果key不存在就要新增一个 tabPane
     if (!exist) {
       this.state.tabPanes.push({
         key,
         title: tabTitle,
-        //content: React.cloneElement(props.children),  // 我本来是想clone一下children的, 这样比较保险, 不同tab不会互相干扰, 但发现似乎不clone也没啥bug
+        //content: React.cloneElement(props.children),  // 我本来是想clone一下 children的, 这样比较保险, 不同tab不会互相干扰, 但发现似乎不clone 也没啥bug
         content: props.children,
       });
     }
@@ -212,7 +209,7 @@ class App extends React.Component {
    * 改变tab时的回调
    */
   onTabChange = (activeKey) => {
-    this.setState({currentTabKey: activeKey});
+    this.setState({ currentTabKey: activeKey });
   };
 
   /**
@@ -244,14 +241,14 @@ class App extends React.Component {
 
     // 过滤panes
     const newTabPanes = this.state.tabPanes.filter(pane => pane.key !== targetKey);
-    this.setState({tabPanes: newTabPanes, currentTabKey: nextTabKey});
+    this.setState({ tabPanes: newTabPanes, currentTabKey: nextTabKey });
   };
 
   /**
    * 渲染界面右侧主要的操作区
    */
   renderBody() {
-    // 我本来是在jsx表达式中判断globalConfig.tabMode.enable的, 比如{globalConfig.tabMode.enable && XXX}
+    // 我本来是在jsx表达式中判断 globalConfig.tabMode.enable的, 比如{globalConfig.tabMode.enable && XXX}
     // 后来想会不会拿到外面去判断好些, webpack会不会把这个语句优化掉? 好像有一些类似的机制
     // 因为在编译的时候, globalConfig.tabMode.enable的值已经是确定的了, 下面的if-else其实是可以优化的
     // 如果是jsx表达式那种写法, 感觉不太可能优化
@@ -263,17 +260,17 @@ class App extends React.Component {
         return <div className="ant-layout-container"><Welcome /></div>;
       } else {
         return <Tabs activeKey={this.state.currentTabKey} type="editable-card"
-                     onEdit={this.onTabRemove} onChange={this.onTabChange}
-                     hideAdd className="ant-layout-tab">
+          onEdit={this.onTabRemove} onChange={this.onTabChange}
+          hideAdd className="ant-layout-tab">
           {this.state.tabPanes.map(pane => <TabPane tab={pane.title} key={pane.key}
-                                                    closable={true}>{pane.content}</TabPane>)}
+            closable={true}>{pane.content}</TabPane>)}
         </Tabs>;
       }
     }
     // 非tab模式, 显示面包屑和对应的组件
     else {
       return <div>
-        <Breadcrumb routes={this.props.routes}/>
+        <Breadcrumb routes={this.props.routes} />
         <div className="ant-layout-container">
           {this.props.children}
         </div>
@@ -285,7 +282,7 @@ class App extends React.Component {
   render() {
     // 显示一个加载中
     if (this.state.tryingLogin) {
-      return <div className="center-div"><Spin spinning={true} size="large"/></div>;
+      return <div className="center-div"><Spin spinning={true} size="large" /></div>;
     }
 
     // 跳转到登录界面
@@ -300,7 +297,7 @@ class App extends React.Component {
         <Sidebar />
 
         <div id="main-content-div" className={this.props.collapse ? 'ant-layout-main-collapse' : 'ant-layout-main'}>
-          <Header userName={this.props.userName}/>
+          <Header userName={this.props.userName} />
           {this.renderBody()}
           <Footer />
         </div>
