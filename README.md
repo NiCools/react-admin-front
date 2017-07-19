@@ -2,4 +2,4 @@
 
 项目展示地址：
 
-http://rulifun/react-admin/index.html
+http://rulifun.com/react-admin/index.html
