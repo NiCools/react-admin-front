@@ -13,29 +13,29 @@
 const sidebarMenu = [
   {
     key: 'index',  // route时url中的值
-    name: '菜单哈哈哈',  // 在菜单中显示的名称
+    name: '第一个一级菜单',  // 在菜单中显示的名称
     icon: 'smile',  // 图标是可选的
     child: [
       {
         key: 'option1',
-        name: '模拟CRUD',
+        name: '增改查删',
         icon: 'play-circle',   // 二级三级菜单也可以带图标
       },
       {
         key: 'option2',
-        name: '图片DEMO',
+        name: '带图片的表格',
         icon: 'android',
       },
       {
         key: 'option3',
-        name: '自定义操作',
+        name: '带按钮的表格',
         icon: 'bulb',
       },
     ],
   },
   {
     key: 'alone',
-    name: '我没有子菜单',
+    name: '第二个一级没子菜单',
     icon: 'clock-circle',
   },
   {

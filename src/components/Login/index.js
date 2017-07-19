@@ -116,7 +116,7 @@ class Login extends React.PureComponent {
             </FormItem>
             <FormItem>
               <Checkbox>记住我</Checkbox>
-              <a className="login-form-forgot" href="">忘记密码</a>
+              <a className="login-form-forgot" href="">忘记密码?测试地址账号和密码都为‘guest’</a>
               <Button type="primary" htmlType="submit" className="login-form-button">
                 登陆
               </Button>
